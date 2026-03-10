@@ -8,6 +8,8 @@ const menuRoutes = require("./routes/menuRoutes");
 const responseRoutes = require("./routes/responseRoutes");
 const wasteRoutes = require("./routes/wasteRoutes");
 
+
+
 const app = express();
 connectDB();
 
@@ -18,6 +20,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/menu", menuRoutes);
 app.use("/api/responses", responseRoutes);
 app.use("/api/waste", wasteRoutes);
+
 
 app.get("/", (req, res) => {
     res.send("Smart Mess Backend Running");

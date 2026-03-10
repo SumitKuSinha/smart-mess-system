@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { calculateWaste } = require("../controllers/wasteController");
+const { calculateDifference } = require("../controllers/wasteController");
 
-router.post("/", calculateWaste);
+
+router.post("/", calculateDifference);
 
 module.exports = router;

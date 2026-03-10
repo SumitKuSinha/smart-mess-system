@@ -1,7 +1,7 @@
 const Waste = require("../models/Waste");
 const Response = require("../models/Response");
 
-exports.calculateWaste = async (req, res) => {
+exports.calculateDifference = async (req, res) => {
 
   try {
 

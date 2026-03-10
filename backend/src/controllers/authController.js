@@ -36,7 +36,7 @@ exports.register = async (req, res) => {
 // Login
 exports.login = async (req, res) => {
     try {
-
+        
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
@@ -59,7 +59,9 @@ exports.login = async (req, res) => {
 
         res.json({
             message: "Login successful",
+            role:user.role,
             token
+
         });
 
     } catch (error) {
