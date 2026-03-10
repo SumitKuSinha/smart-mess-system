@@ -32,25 +32,21 @@ const [breakfastActual,setBreakfastActual] = useState("");
 const [lunchActual,setLunchActual] = useState("");
 const [dinnerActual,setDinnerActual] = useState("");
 
-const fetchPrediction = async ()=>{
+useEffect(() => {
+    
+    const fetchPrediction = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/responses/prediction/2026-03-10"
+        );
+        setPrediction(res.data);
+      } catch (err) {
+        console.error("Error fetching prediction:", err);
+      }
+    };
 
-try{
-
-const res = await axios.get(
-"http://localhost:5000/api/responses/prediction/2026-03-10"
-);
-
-setPrediction(res.data);
-
-}catch(err){
-console.log(err);
-}
-
-};
-
-useEffect(()=>{
-fetchPrediction();
-},[]);
+    fetchPrediction();
+  }, []);
 
 const handleCalculate = async () => {
 
