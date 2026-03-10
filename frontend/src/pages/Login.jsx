@@ -9,14 +9,30 @@ const [password,setPassword] = useState("");
 
 const handleLogin = async () => {
 
-const res = await axios.post("http://localhost:5000/api/auth/login",{
+try{
+
+const res = await axios.post(
+"http://localhost:5000/api/auth/login",
+{
 email,
 password
-});
+}
+);
 
 localStorage.setItem("token",res.data.token);
+localStorage.setItem("role",res.data.role);
 
+if(res.data.role === "staff"){
 window.location.href="/dashboard";
+}else{
+window.location.href="/student";
+}
+
+}catch(err){
+
+alert("Login failed",err);
+
+}
 
 }
 
