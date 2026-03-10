@@ -1,18 +1,19 @@
 import { useState } from "react";
 import axios from "axios";
 
-function Response(){
+function Menu(){
 
-const [breakfast,setBreakfast] = useState(false);
-const [lunch,setLunch] = useState(false);
-const [dinner,setDinner] = useState(false);
+const [breakfast,setBreakfast] = useState("");
+const [lunch,setLunch] = useState("");
+const [dinner,setDinner] = useState("");
 
-const submitResponse = async ()=>{
+const createMenu = async ()=>{
+
+try{
 
 await axios.post(
-"http://localhost:5000/api/responses",
+"http://localhost:5000/api/menu",
 {
-user:"USER_ID_HERE",
 date:new Date().toISOString().slice(0,10),
 breakfast,
 lunch,
@@ -20,7 +21,11 @@ dinner
 }
 );
 
-alert("Response submitted");
+alert("Menu Created");
+
+}catch(err){
+console.log(err);
+}
 
 };
 
@@ -28,37 +33,34 @@ return(
 
 <div style={{padding:"40px"}}>
 
-<h2>Meal Selection</h2>
+<h2>Create Menu</h2>
 
-<label>
-<input type="checkbox"
-onChange={()=>setBreakfast(!breakfast)}
+<input
+placeholder="Breakfast"
+value={breakfast}
+onChange={(e)=>setBreakfast(e.target.value)}
 />
-Breakfast
-</label>
-
-<br/>
-
-<label>
-<input type="checkbox"
-onChange={()=>setLunch(!lunch)}
-/>
-Lunch
-</label>
-
-<br/>
-
-<label>
-<input type="checkbox"
-onChange={()=>setDinner(!dinner)}
-/>
-Dinner
-</label>
 
 <br/><br/>
 
-<button onClick={submitResponse}>
-Submit
+<input
+placeholder="Lunch"
+value={lunch}
+onChange={(e)=>setLunch(e.target.value)}
+/>
+
+<br/><br/>
+
+<input
+placeholder="Dinner"
+value={dinner}
+onChange={(e)=>setDinner(e.target.value)}
+/>
+
+<br/><br/>
+
+<button onClick={createMenu}>
+Save Menu
 </button>
 
 </div>
@@ -67,4 +69,4 @@ Submit
 
 }
 
-export default Response;
+export default Menu;
